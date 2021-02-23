@@ -1,41 +1,48 @@
-import { useState, useEffect } from 'react';
+import { Component } from 'react';
 import './App.css';
 
 import myService from './common/services/service';
 import { FormHandler } from './container/FormHandler/FormHandler';
 
 
-function App() {
-  const [data, setData] = useState(null);
-  const [displayfields, setDisplayfields] = useState([]);
-
-  const getEntityMeta = async () => {
-    const userFields = await myService.getMeta();
-    setDisplayfields(userFields);
+class App extends Component {
+  state = {
+    data: null,
+    displayfields: [],
+    entityLabel: '',
+    entityName: '',
   }
 
-  const getEntityData = async () => {
+  getEntityMeta = async () => {
+    const result = await myService.getMeta();
+    this.setState({ displayfields: result.userFields, entityLabel: result.label, entityName: result.name })
+  }
+
+  getEntityData = async () => {
     const result = await myService.getData();
-    setData(result);
+    this.setState({ data: result })
   }
 
-  useEffect(() => {
-    getEntityMeta();
-  });
+  componentDidMount() {
+    this.getEntityMeta();
+    this.getEntityData();
+  }
 
-  useEffect(() => {
-    getEntityData();
-  })
-
-
-  let form = '';
-  if (data && displayfields.length)
-    form = (<FormHandler displayfields={displayfields} data={data} ></FormHandler>)
-  return (
-    <div className="App">
-      {form}
-    </div>
-  );
+  render() {
+    let form = '';
+    if (this.state.data && this.state.displayfields.length)
+      form = (
+        <FormHandler
+          displayfields={this.state.displayfields}
+          data={this.state.data}
+          entityLabel={this.state.entityLabel} >
+        </FormHandler>
+      )
+    return (
+      <div className="App">
+        {form}
+      </div>
+    );
+  }
 }
-
 export default App;

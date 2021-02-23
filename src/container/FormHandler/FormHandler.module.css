@@ -1,3 +1,40 @@
 .myCustonClass{
     color: blue;
 }
+
+form{
+    width: 500px;
+    margin-left: 30vw;
+    margin-right: 30vw;
+    display: block;
+
+}
+
+.inputDiv{
+    width: 225px;
+    float: left;
+    height: 70px;
+}
+
+.container{
+    width: 500px;
+    background: #FFFFFF;
+    border: 1px solid #D7DADE;
+    border-radius: 5px;
+}
+
+.header{
+    margin-top: 50px;
+    height: 50px;
+    padding: 10px;
+}
+
+button{
+    margin-left: 50px;
+    height: 30px;
+    font-size: 1rem;
+}
+
+.displayBlock{
+    display: block;;
+}
