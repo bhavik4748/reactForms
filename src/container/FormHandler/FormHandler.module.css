@@ -1,40 +1,60 @@
-.myCustonClass{
+.myCustonClass {
     color: blue;
 }
 
-form{
-    width: 500px;
-    margin-left: 30vw;
-    margin-right: 30vw;
-    display: block;
-
+.form {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid lightgray;
 }
 
-.inputDiv{
-    width: 225px;
-    float: left;
+.savedValues {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+ul{
+    padding: 0px;
+}
+
+ li {
+    padding: 10px 0px;
+}
+
+.inputDiv {
+    width: 250px;
     height: 70px;
 }
 
-.container{
+.container {
     width: 500px;
     background: #FFFFFF;
     border: 1px solid #D7DADE;
     border-radius: 5px;
 }
 
-.header{
+.header {
     margin-top: 50px;
     height: 50px;
     padding: 10px;
+    width: 450px;
 }
 
-button{
+button {
     margin-left: 50px;
     height: 30px;
     font-size: 1rem;
+    float: right;
+    cursor: pointer;
 }
 
-.displayBlock{
-    display: block;;
+.displayBlock {
+    display: block;
 }

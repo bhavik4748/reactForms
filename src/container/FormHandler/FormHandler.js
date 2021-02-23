@@ -41,9 +41,9 @@ const FormHandler = (props) => {
 
     return (
         <div>
-            <form onSubmit={submitHandler}>
+            <form className={classes.form} onSubmit={submitHandler}>
                 <div className={classes.header}>
-                    {props.entityLabel} : {instanceLabel}      <button >Save</button>
+                    {props.entityLabel} # {instanceLabel}      <button >Save</button>
                 </div>
                 {formValues.map(obj => {
                     return (
@@ -60,14 +60,14 @@ const FormHandler = (props) => {
                     )
                 })}
             </form>
-            <div>
+            <div className={classes.savedValues} >
                 Saved Values:
                 <ul>
                     {formSubmittedValues.map(a => {
                         return (
                             <li className={classes.displayBlock}>
                                 <div className={classes.displayBlock} key={a.id}>Instance:  {a.id} </div>
-                                <div className={classes.displayBlock} key={a.id}>{a.val} </div>
+                                <div className={classes.displayBlock} key={a.id}>Values: {a.val} </div>
                             </li>
                         )
                     })}
