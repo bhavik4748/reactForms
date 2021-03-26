@@ -5,7 +5,7 @@ import service from '../../common/services/service';
 
 const FormHandler = (props) => {
     const [instanceLabel, setInstanceLabel] = useState(service.generateInstanceLabel())
-    const [formValues, setFormValues] = useState(props.displayfields);
+    const [formValues, setFormValues] = useState([...props.displayfields]);
     const [formSubmittedValues, setFormSubmittedValues] = useState([]);
     const changeHandler = (event, name) => {
         for (let i = 0; i < formValues.length; i++) {
@@ -16,13 +16,13 @@ const FormHandler = (props) => {
                     formValues[i].value = event.target.value;
                 }
 
-                setFormValues(formValues);
+                setFormValues([...formValues]);
             }
         }
     }
     const submitHandler = (event) => {
         event.preventDefault();
-        let formObj = {};
+        const formObj = {};
         formObj['$original'] = {}
         for (let i = 0; i < formValues.length; i++) {
             if (formValues[i].value) {
@@ -36,7 +36,17 @@ const FormHandler = (props) => {
 
         const arr = [...formSubmittedValues];
         arr.push({ 'id': instanceLabel, 'val': JSON.stringify(formObj) });
+        service.store(instanceLabel, formObj, 'formValues');
         setFormSubmittedValues(arr);
+        console.log(formValues,props.displayfields);
+        resetForm();
+    }
+
+    const resetForm = () => {
+        for (let obj of formValues){
+            obj.value = '';
+        }
+      //  setFormValues([...formValues]);
     }
 
     return (
@@ -54,6 +64,7 @@ const FormHandler = (props) => {
                                 label={obj.label}
                                 name={obj.name}
                                 default={props.data[obj.name]}
+                                value={obj.value}
                                 changed={(event) => changeHandler(event, obj.name)}
                             />
                         </div>
@@ -65,9 +76,9 @@ const FormHandler = (props) => {
                 <ul>
                     {formSubmittedValues.map(a => {
                         return (
-                            <li className={classes.displayBlock}>
-                                <div className={classes.displayBlock} key={a.id}>Instance:  {a.id} </div>
-                                <div className={classes.displayBlock} key={a.id}>Values: {a.val} </div>
+                            <li key={a.id} className={classes.displayBlock}>
+                                <div className={classes.displayBlock} >Instance:  {a.id} </div>
+                                <div className={classes.displayBlock} >Values: {a.val} </div>
                             </li>
                         )
                     })}

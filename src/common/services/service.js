@@ -10,8 +10,8 @@ service.getMeta = async () => {
     const result = await res.json();
     const userFields = [];
     for (let field of result.field) {
-        if (!field.system){
-            field.value='';
+        if (!field.system) {
+            field.value = '';
             userFields.push(field);
         }
 
@@ -37,5 +37,21 @@ service.generateInstanceLabel = (len = 20, arr = "123456abcedefghi") => {
     }
     return ans;
 }
+
+service.store = (key, value, dict) => {
+    const dictionaryStr = localStorage.getItem(dict);
+    let dictionary;
+    const setting = {};
+
+    setting[key] = value;
+    if (dictionaryStr === null) {
+        localStorage.setItem(dict, JSON.stringify(setting));
+    } else {
+        dictionary = JSON.parse(dictionaryStr);
+        dictionary[key] = value;
+        localStorage.setItem(dict, JSON.stringify(dictionary));
+    }
+}
+
 
 export default service;

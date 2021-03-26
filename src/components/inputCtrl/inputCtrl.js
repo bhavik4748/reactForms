@@ -16,7 +16,7 @@ const InputCtrl = (props) => {
                             id={props.name}
                             placeholder={props.default}
                             onChange={props.changed}
-
+                            value={props.value}
                         />
                     </label>
 
@@ -33,6 +33,7 @@ const InputCtrl = (props) => {
                             id={props.name}
                             placeholder={props.default}
                             onChange={props.changed}
+                            value={props.value}
 
                         />
                     </label>
